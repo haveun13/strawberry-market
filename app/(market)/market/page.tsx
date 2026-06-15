@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import { createClient } from '@/lib/supabase/server'
 
 export default async function MarketPage() {
@@ -54,12 +55,14 @@ export default async function MarketPage() {
         <div className="text-5xl mb-4">🛒</div>
         <p className="font-bold mb-1" style={{ color: '#2D1B1B' }}>아직 등록된 상품이 없어요</p>
         <p className="text-sm">첫 번째 상품을 올려보세요!</p>
-        <button
-          className="mt-4 px-6 py-3 rounded-full text-sm font-bold text-white"
-          style={{ background: 'linear-gradient(135deg, #FF3B5C, #FF8FAB)' }}
-        >
-          + 상품 등록하기
-        </button>
+        <Link href="/sell">
+          <button
+            className="mt-4 px-6 py-3 rounded-full text-sm font-bold text-white"
+            style={{ background: 'linear-gradient(135deg, #FF3B5C, #FF8FAB)' }}
+          >
+            + 상품 등록하기
+          </button>
+        </Link>
       </div>
     </div>
   )
