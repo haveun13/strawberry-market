@@ -38,7 +38,7 @@ export default function SignupPage() {
     setLoading(true)
 
     const supabase = createClient()
-    const { error } = await supabase.auth.signUp({
+    const { data, error } = await supabase.auth.signUp({
       email,
       password,
       options: {
@@ -63,6 +63,14 @@ export default function SignupPage() {
       return
     }
 
+    // 이메일 인증이 꺼져 있으면 세션이 바로 생성됨 → 마켓으로 이동
+    if (data.session) {
+      router.push('/market')
+      router.refresh()
+      return
+    }
+
+    // 이메일 인증이 켜져 있으면 인증 메일 확인 안내
     setSuccess(true)
     setLoading(false)
   }
