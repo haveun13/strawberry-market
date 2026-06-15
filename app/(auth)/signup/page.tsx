@@ -48,10 +48,16 @@ export default function SignupPage() {
     })
 
     if (error) {
-      if (error.message.includes('already registered')) {
+      if (error.message.includes('already registered') || error.message.includes('User already registered')) {
         setError('이미 사용 중인 이메일이에요!')
+      } else if (error.message.includes('Email signups are disabled')) {
+        setError('현재 이메일 가입이 비활성화되어 있어요. 관리자에게 문의하세요.')
+      } else if (error.message.includes('Invalid email')) {
+        setError('올바른 이메일 형식이 아니에요.')
+      } else if (error.message.includes('Password should be')) {
+        setError('비밀번호는 6자리 이상이어야 해요.')
       } else {
-        setError('회원가입 중 오류가 발생했어요. 다시 시도해주세요.')
+        setError(`오류: ${error.message}`)
       }
       setLoading(false)
       return
